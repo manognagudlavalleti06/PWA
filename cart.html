@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0083b0" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - ShopZone</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="js/cart.js"></script>
+</head>
+<body>
+<script>
+  function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('show');
+  }
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(reg => console.log('✅ Service Worker Registered:', reg.scope))
+        .catch(err => console.error('❌ Service Worker Failed:', err));
+    });
+  }
+</script>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-brand">ShopZone</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Your Cart</h1>
+  </header>
+
+  <main id="cart-container">
+    <!-- Cart items appear here -->
+  </main>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cart-container');
+    if (cart.length === 0) {
+      container.innerHTML = "<p>Your cart is empty 😔</p>";
+    } else {
+      let total = 0;
+      cart.forEach((item) => {
+        container.innerHTML += `
+          <div class="product-card">
+            <h2>${item.product}</h2>
+            <p>₹${item.price}</p>
+          </div>`;
+        total += item.price;
+      });
+      container.innerHTML += `<h3 style="text-align:center;">Total: ₹${total}</h3>`;
+    }
+  </script>
+
+</body>
+</html>

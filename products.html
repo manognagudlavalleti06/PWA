@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0083b0" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - ShopZone</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="js/cart.js"></script>
+</head>
+<body>
+<script>
+  function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('show');
+  }
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(reg => console.log('✅ Service Worker Registered:', reg.scope))
+        .catch(err => console.error('❌ Service Worker Failed:', err));
+    });
+  }
+</script>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-brand">ShopZone</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Our Products</h1>
+  </header>
+
+  <main>
+    <div class="product-card">
+      <img src="images/shoe.jpg" alt="Shoe" />
+      <h2>Running Shoes</h2>
+      <p>₹999</p>
+      <button onclick="addToCart('Running Shoes', 999)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/headphones.jpg" alt="Headphones" />
+      <h2>Bluetooth Headphones</h2>
+      <p>₹1499</p>
+      <button onclick="addToCart('Bluetooth Headphones', 1499)">Add to Cart</button>
+    </div>
+  </main>
+
+</body>
+</html>
+<script>
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      alert("You must be logged in");
+      window.location.href = "login.html";
+    }
+  });
+</script>

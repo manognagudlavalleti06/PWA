@@ -1,0 +1,25 @@
+<h2>Login</h2>
+<input type="email" id="email" placeholder="Email" />
+<input type="password" id="password" placeholder="Password" />
+<button onclick="login()">Login</button>
+<button onclick="signup()">Sign Up</button>
+
+<script>
+  const auth = firebase.auth();
+
+  function login() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(user => alert('Logged in!'))
+      .catch(err => alert(err.message));
+  }
+
+  function signup() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then(user => alert('Signed up!'))
+      .catch(err => alert(err.message));
+  }
+</script>
